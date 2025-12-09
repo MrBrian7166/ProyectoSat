@@ -1,0 +1,13 @@
+=== OUTPUT ===
+🚀 INICIANDO PUPPETEER PARA SAT
+{
+  "success": false,
+  "error": "ENOENT: no such file or directory, mkdtemp 'undefined\\temp\\puppeteer_dev_chrome_profile-XXXXXX'",
+  "stack": "Error: ENOENT: no such file or directory, mkdtemp 'undefined\\temp\\puppeteer_dev_chrome_profile-XXXXXX'\n    at async mkdtemp (node:internal/fs/promises:1178:10)\n    at async ChromeLauncher.computeLaunchArguments (file:///C:/laragon/www/ProyectoSAT/node_modules/puppeteer-core/lib/esm/puppeteer/node/ChromeLauncher.js:76:53)\n    at async ChromeLauncher.launch (file:///C:/laragon/www/ProyectoSAT/node_modules/puppeteer-core/lib/esm/puppeteer/node/BrowserLauncher.js:49:28)\n    at async main (file:///C:/laragon/www/ProyectoSAT/scripts/sat-simple.mjs:11:19)",
+  "timestamp": "2025-12-08T09:10:20.428Z"
+}
+
+
+=== ERROR ===
+
+❌ ERROR: ENOENT: no such file or directory, mkdtemp 'undefined\temp\puppeteer_dev_chrome_profile-XXXXXX'
