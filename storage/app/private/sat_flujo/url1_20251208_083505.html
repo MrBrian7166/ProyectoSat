@@ -1,0 +1,111 @@
+
+  
+
+
+
+
+
+
+  
+<!DOCTYPE html>
+<html>
+	<head>
+	<!-- https://bugzilla.novell.com/show_bug.cgi?id=997951,for Kerberos in IE 11, we need to put idp under local intranet site.
+	A Local intranet site is displayed in Compatibility View by default by IE. In compatibilty mode advanced latest jquery or javascript
+	libraries do not work. So we need to force browser to run in non-compatibility mode. For, this 
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=Edge">
+	should be the first statement in your html. so, 
+	*****NOTE ****DONOT add any other meta tag before X-UA-Compatible. Other tags cab be added after this tag
+	 --> 
+	    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=Edge">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title></title>
+		<noscript>
+			<div  style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+				Your web browser must have JavaScript enabled in order for this application to display correctly.
+		    </div>
+		    <style type="text/css">
+		    	#reconContent { display:none; }
+		    </style>
+        </noscript>
+	</head>
+	<body >
+	<div id="reconContent">
+	    <form name="recon" id="deviceRecon" action ="https://login.mat.sat.gob.mx/nidp//app/login?target=https%3A%2F%2Flogin.mat.sat.gob.mx%2Fnidp%2Foauth%2Fnam%2Fauthz%3Fclient_id%3D50bffab8-793c-41c4-b639-9abe2a93cb2c%26redirect_uri%3Dhttps%3A%2F%2Fptsc32d.clouda.sat.gob.mx%3A443%2Foauth2%2Fcallback%26response_type%3Dcode%26scope%3Dopenid%2Bmscontribuyente%26code_challenge%3DkeBew7q19naJxaTIXK27KNtB886H1Z0u8eFGqIhuzyQ%26code_challenge_method%3DS256%26response_mode%3Dform_post%26nonce%3D639007739736089596.MGFhODJjMjItYzAyNS00OWQyLWJiZGQtNThlYjY5YWQyOTczZDNjODM3ZDYtZjRhOS00OTlkLThmNDktNzA2MmUxZTNiYmI2%26state%3DCfDJ8OSJ4mcSBN1Cm3RmDyDIwh5laxT7GJezGjNNWp5rLUOmge3BVJ2lSo0iR6gplpJf8-U-owHI9VY6xrUgsTm_yTmf8XCsLZXuSIcVW4BS6o0Rrf6CtPvioLi94nxd0rLKXaLyQsdCr8OzqWjH-h62nT7XGVII_b0kdXbu75vXsp_BH2ft9SY4_iA-1uhPsNN28OdD5rS7i7yg4qdsSFtx-oxADQXNDCuz2ZkvErTexKptOTppvg4pfQWzOe6YjKacZntsMoVc6TGgW1b5pIViKzjlpUNd9Sebw2LTAXRhmlmcVj5RTpyUq467ogC03gIkmV9pvo-N-kVXWxb0_L-1olyrlEUF36NL60PgRmgsMp4f3MxkZjwy7scjnLVWTR0JLsGYk6x1HjlnzCRoMB4-722vtYC5PsNbPeeMGuHiG9wUAUuQwRWQ1VeHrstx-mgfDA%26x-client-SKU%3DID_NETSTANDARD2_0%26x-client-ver%3D6.10.0.0" method="POST">
+	    	<input type="hidden" name="deviceAttributes" id="deviceAttributes" value="">
+	    	<input type="hidden" name="fingerprint" id="fingerprint" value="">
+	    	<input type="hidden" name="deviceFetchGuidance" id="deviceFetchGuidance" value="">
+	    	<input type="hidden" name="innerCall" id="innerCall" value="true">
+	    	<input type="hidden" name="rid" id="rid" value="1">
+	    	<input type="hidden" name="firstTimeFingerprint" id="firstTimeFingerprint" value="true">  
+	    </form>
+	    <script type="text/javascript" src="/nidp/javascript/deviceFingerprinting/min/fontDetect.min.js"></script> 
+		<script type="text/javascript" src="/nidp/javascript/deviceFingerprinting/min/modernizr-nam.min.js"></script>
+		<script type="text/javascript" src="/nidp/javascript/deviceFingerprinting/min/namFingerprint.min.js"></script> 
+		<script type="text/javascript" src="/nidp/javascript/deviceFingerprinting/min/ua-parser.min.js"></script>
+		<script type="text/javascript" src="/nidp/javascript/deviceFingerprinting/min/storage.min.js"></script>
+		<script type="text/javascript" src="/nidp/javascript/deviceFingerprinting/min/crypto.min.js"></script>
+		<script type="text/javascript" src="/nidp/javascript/deviceFingerprinting/node-jose/dist/node-jose.min.js"></script>
+		<script>
+			function doRecon(){
+				if ( true ) 
+					setks();
+				this.document.recon.deviceAttributes.value = calculateFreshFingerprint( 'deviceType, deviceLanguage_deviceDefaultLanguage, userAgent_uaVersion, cpuArchitecture_cpuArchitecture, dnt, operatingSystem_osVersion, deviceLanguage_deviceLanguageSet, userAgent_uaName, navigatorConcurrency, deviceTouchSupport, timezoneOffset, deviceTouchPoints, navigatorPlatform_navigatorPlatform, colorDepth, operatingSystem_osName,userAgent_uaString');
+				if(false){
+					this.document.recon.fingerprint.value = fetchFingerprint();
+				}else{
+					if(false){
+						this.document.recon.deviceFetchGuidance.value = getDeviceFetchGuidance( '');
+					}
+				}
+				submitForm();
+			}
+			
+			function fetchFingerprint(){
+				var dfp = read('');
+				return dfp;
+			}
+			
+			function setks(){
+				clearStorage('_dreanskasjeaidp');
+				var json = JSON.parse('{"kty":"oct","use":"sig","alg":"HS256","k":"5qEe6XZJbQV1kDzmTfcfUMfRN583SBpRKnultss2qMI="}');
+				var s = "'" + json.k + "'";
+				json = JSON.parse('{"kty":"oct","use":"enc","alg":"A128CBC-HS256","k":"C9FNwqF/pyG9Q6z9Xs6a6fGmxiEzFJcAmG7GSJDlqOs="}');
+				var k = "'" + json.k + "'";
+				 if(typeof console !== "undefined")
+				{
+					console.log ("setting key " + s );
+					console.log ("setting key " + k );
+				}
+				write('441344_dreanskasjeaidp',s);
+				write('764168_dreanskasjeaidp',k);
+			}
+
+			function calculateFreshFingerprint(attributeNames){
+				var attributeArray = attributeNames.split(',');
+				return getFingerprint(attributeArray, '1765182868129');
+			}
+			
+			function submitForm(){
+				if ( true || false || true ){
+					getFingerprintSignedEnc(this.document.recon.deviceAttributes.value, '{"kty":"oct","use":"sig","alg":"HS256","k":"5qEe6XZJbQV1kDzmTfcfUMfRN583SBpRKnultss2qMI="}', '{"kty":"oct","use":"enc","alg":"A128CBC-HS256","k":"C9FNwqF/pyG9Q6z9Xs6a6fGmxiEzFJcAmG7GSJDlqOs="}');
+				}else {
+					var s = read('441344_dreanskasjeaidp');
+					var e = read('764168_dreanskasjeaidp');
+					var sk = "{ \"kty\":\"oct\", \"use\":\"sig\", \"alg\":\"HS256\",\"k\":\"" + s + "\" }";
+					//console.log (sk );
+					var ek = "{ \"kty\":\"oct\", \"use\":\"enc\", \"alg\":\"A128CBC-HS256\",\"k\":\"" + e + "\" }";
+					getFingerprintSignedEnc(this.document.recon.deviceAttributes.value, sk, ek);
+				}
+			}
+			
+			doRecon();
+			
+		</script>
+		</div>
+	</body>
+</html>
+
