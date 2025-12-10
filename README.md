@@ -1,59 +1,141 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+PROYECTO: Sistema de Opinión de Cumplimiento SAT
+Autor: Brian Diaz Carrillo
+Fecha: 10/12/2025
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+========================================
+1. DESCRIPCIÓN GENERAL
+========================================
+Esta aplicación web permite gestionar clientes y simular la consulta de la Opinión de Cumplimiento del SAT.
 
-## About Laravel
+El flujo principal:
+- El usuario añade un cliente atravez del sistema
+- El usuario selecciona un cliente.
+- Se simula una "consulta" al SAT a partir de un PDF de la opinión ya descargado manualmente.
+- El sistema analiza el PDF, detecta si el SENTIDO es POSITIVO o NEGATIVO y guarda el resultado en la base de datos.
+- Se muestra el resultado en pantalla y se puede ver el PDF asociado.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+La aplicación está desarrollada con el framework Laravel (PHP) siguiendo el patrón MVC.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+========================================
+2. TECNOLOGÍAS UTILIZADAS
+========================================
+Backend:
+- PHP 8.x
+- Framework Laravel [versión que usas]
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Frontend:
+- Blade (motor de plantillas de Laravel)
+- Bootstrap
 
-## Learning Laravel
+Base de Datos:
+- MySQL
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Librerías adicionales:
+- smalot/pdfparser (para leer texto de los PDFs de Opinión)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+========================================
+3. PROCEDIMIENTO DE INSTALACIÓN
+========================================
+Requisitos previos:
+- PHP >= 8.0
+- Composer
+- MySQL
+- Node.js y npm (si se usan assets con Laravel Mix o Vite)
 
-## Laravel Sponsors
+Pasos:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1) Clonar o descomprimir el proyecto en el servidor local:
+   - Carpeta base: C:\laragon\www\ProyectoSAT
 
-### Premium Partners
+2) Instalar dependencias de PHP:
+   - Desde la raíz del proyecto:
+     composer install
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+3) Copiar el archivo de entorno:
+   - cp .env.example .env
 
-## Contributing
+4) Configurar el archivo .env:
+   - DB_DATABASE=bd_proyectosat
+   - DB_USERNAME=[tu_usuario_mysql]
+   - DB_PASSWORD=[tu_contraseña_mysql]
+   - APP_URL=http://localhost:8000
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5) Generar la key de la aplicación:
+   - php artisan key:generate
 
-## Code of Conduct
+6) Importar la base de datos:
+   - Crear la base de datos "bd_proyectosat" en MySQL.
+   - Importar el archivo base_datos_proyectosat.sql incluido en este proyecto.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+7) Ejecutar migraciones (si es necesario):
+   - php artisan migrate
 
-## Security Vulnerabilities
+8) Crear carpeta de opiniones de SAT (si no existe):
+   - storage/app/opiniones_sat/
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+9) Colocar manualmente los PDFs de Opinión dentro de storage/app/opiniones_sat/
+   - Ejemplo:
+     storage/app/opiniones_sat/opinion_AACA530204RN6_2025-12-10.pdf
+     storage/app/opiniones_sat/opinion_AALA790124DC3_2025-12-10.pdf
 
-## License
+10) Levantar el servidor de desarrollo:
+   - php artisan serve
+   - URL: http://localhost:8000
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+========================================
+4. CREDENCIALES DE ACCESO
+========================================
+Usuario por defecto (ejemplo):
+- Email: admin@example.com
+- Contraseña: 123456
+
+Rol:
+- Administrador: puede gestionar clientes y ejecutar el proceso de simulación de opinión.
+
+========================================
+5. FUNCIONAMIENTO BÁSICO
+========================================
+1) Agregar un cliente con las credenciales indicadas.
+2) Ir al menú "Proceso SAT" o a la ruta /proceso.
+3) Se mostrará la lista de clientes.
+4) Cada cliente tiene un botón "Resultado Opinión":
+   - El sistema arma la ruta del PDF: opiniones_sat/opinion_<RFC>_2025-12-10.pdf
+   - Se analiza el PDF:
+       * Si contiene la palabra NEGATIVO, se guarda y muestra como NEGATIVO.
+       * Si contiene la palabra POSITIVO, se guarda y muestra como POSITIVO.
+5) Se muestra el resultado en la parte superior:
+   - En VERDE si es POSITIVO.
+   - En ROJO si es NEGATIVO.
+6) Se puede ver el PDF original con el botón "Ver PDF".
+
+========================================
+6. ARQUITECTURA Y ESTRUCTURA DEL PROYECTO
+========================================
+Patrón de diseño: MVC de Laravel.
+
+Carpetas principales:
+- app/Models
+  - Cliente.php
+  - ResultadoSat.php
+- app/Http/Controllers
+  - ProcesoController.php
+- app/Services
+  - SatService.php   (contiene la lógica para analizar PDFs de opinión)
+- resources/views
+  - proceso/index.blade.php  (vista principal del flujo SAT)
+
+- database/migrations
+  - create_clientes_table.php
+  - create_resultado_sats_table.php
+
+========================================
+7. URL DE DESCARGA (SI EL PROYECTO > 5MB)
+========================================
+En caso de que el archivo supere el límite permitido por Moodle, se incluye el proyecto en:
+- URL: (https://github.com/MrBrian7166/ProyectoSat.git)
+
+========================================
+8. NOTAS ADICIONALES
+========================================
+- La consulta al SAT está simulada. El sistema no se conecta directamente al portal del SAT, sino que analiza un PDF que el usuario descarga manualmente desde el portal oficial.
+- Esto reduce la complejidad y evita problemas técnicos y legales con la automatización del sitio externo.
